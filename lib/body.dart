@@ -36,6 +36,7 @@ class LoginBody extends StatelessWidget {
                     Icons.person,
                     color: Colors.cyan[300],
                   ),
+                  pass: false,
                 ),
                 SizedBox(height: size.height / 40),
                 TextFieldGrey(
@@ -44,13 +45,19 @@ class LoginBody extends StatelessWidget {
                     Icons.vpn_key,
                     color: Colors.cyan[300],
                   ),
+                  pass: true,
                 ),
                 SizedBox(height: size.height / 25),
                 ExpandedBlueButton(size: size),
                 SizedBox(height: size.height / 45),
-                Text(
-                  "¿Olvidate tu contraseña?",
-                  style: TextStyle(fontSize: 18, color: Colors.cyan[300]),
+                GestureDetector(
+                  child: Text(
+                    "¿Olvidate tu contraseña?",
+                    style: TextStyle(fontSize: 18, color: Colors.cyan[300]),
+                  ),
+                  onTap: () {
+                    print("Olvidaste tu contrasena");
+                  },
                 ),
                 SizedBox(height: size.height / 20),
               ],
@@ -60,7 +67,7 @@ class LoginBody extends StatelessWidget {
             width: size.width - size.width / 10,
             child: Column(
               children: [
-                DividerAuth("  O también registrate con:  "),
+                DividerAuth("  O también inicia sesión con:  "),
                 SizedBox(height: size.height / 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

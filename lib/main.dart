@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'body.dart';
+import 'loginBackground.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,33 +33,14 @@ class _MyHomePageState extends State<MyHomePage> {
     SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
-      ]);
+    ]);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
         height: size.height,
         width: size.width,
         color: Colors.grey[800],
-        child: Stack (
-          children: [
-            Positioned(
-              top: 0,
-              child: Image.asset(
-                'assets/images/loguptri.png',
-                width: size.width,
-              ),
-            ),
-            Positioned(
-              top: size.height - 112,
-              child: Image.asset(
-                'assets/images/logdowntri.png',
-                width: size.width,
-              ),
-            ),
-            LoginBody(size: size),
-            
-          ],
-        ),
+        child: LoginBackground(size: size, loginChild: LoginBody(size: size),),
       ),
     );
   }

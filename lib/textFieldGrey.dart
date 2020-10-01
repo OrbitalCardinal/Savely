@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class TextFieldGrey extends StatelessWidget {
   final String labelText;
   final Icon prefixIcon;
-  TextFieldGrey({this.labelText, this.prefixIcon});
+  final bool pass;
+  TextFieldGrey({this.labelText, this.prefixIcon, this.pass});
   @override
   Widget build(BuildContext context) {
     return TextField(
       style: TextStyle(color: Colors.white, fontSize: 18),
+      obscureText: pass ? true : false,
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
            borderSide: BorderSide(color: Colors.cyan[300]),
