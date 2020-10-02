@@ -1,3 +1,4 @@
+import 'package:Savely/widgets/homePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'DividerAuth.dart';
@@ -82,9 +83,16 @@ class _LoginBodyState extends State<LoginBody> {
                     ),
                     onPressed: () async {
                       try {
-                        await _auth.signInWithEmailAndPassword(email: emailController.text, password: passController.text);
+                        await _auth
+                            .signInWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passController.text).then((value) {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (_LoginBodyState) {
+                                    return HomePage(emailController.text);
+                                  }));
+                                });
                       } catch (err) {
-                        print(err);
+                        print("Error: " + err.toString());
                       }
                     },
                   ),
