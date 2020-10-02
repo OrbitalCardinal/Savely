@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'DividerAuth.dart';
 import 'expandedBlueButton.dart';
-import 'facebookCircularButton.dart';
-import 'googleCircularButton.dart';
+import '../facebookCircularButton.dart';
+import '../googleCircularButton.dart';
 import 'noAccountRegister.dart';
 import 'textFieldGrey.dart';
 import 'textLogo.dart';
-import './facebook_icon.dart';
-import './google_icon.dart';
 
 class LoginBody extends StatelessWidget {
-  const LoginBody({
-    Key key,
-    @required this.size,
-  }) : super(key: key);
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +41,7 @@ class LoginBody extends StatelessWidget {
                   pass: true,
                 ),
                 SizedBox(height: size.height / 25),
-                ExpandedBlueButton(size: size),
+                ExpandedBlueButton(login: true,),
                 SizedBox(height: size.height / 45),
                 GestureDetector(
                   child: Text(
@@ -72,8 +65,8 @@ class LoginBody extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    GoogleCircularButton(size: size),
-                    FacebookCircularButton(size: size),
+                    GoogleCircularButton(),
+                    FacebookCircularButton(),
                   ],
                 ),
                 SizedBox(height: size.height / 50),

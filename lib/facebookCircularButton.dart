@@ -3,15 +3,10 @@ import 'package:flutter/material.dart';
 import 'google_icon.dart';
 
 class FacebookCircularButton extends StatelessWidget {
-  const FacebookCircularButton({
-    Key key,
-    @required this.size,
-  }) : super(key: key);
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       height: size.width/7,
       child: RaisedButton(

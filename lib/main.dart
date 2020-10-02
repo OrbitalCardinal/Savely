@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'body.dart';
-import 'loginBackground.dart';
+import 'widgets/loginBackground.dart';
+import 'widgets/registerBody.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,21 +29,18 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
     ]);
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        height: size.height,
-        width: size.width,
-        color: Colors.grey[800],
-        child: LoginBackground(size: size, loginChild: LoginBody(size: size),),
-      ),
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Colors.grey[800],
+          resizeToAvoidBottomInset: false,
+          // body: RegisterBody()
+          body: LoginBackground(),
+          ),
     );
   }
 }
-
 

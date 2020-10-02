@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 
 class ExpandedBlueButton extends StatelessWidget {
-  const ExpandedBlueButton({
-    Key key,
-    @required this.size,
-  }) : super(key: key);
-
-  final Size size;
+  final bool login;
+  ExpandedBlueButton({this.login});
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       height: size.height / 13,
       width: double.infinity,
       child: RaisedButton(
         child: Text(
-          "Iniciar sesión",
+          login ? "Iniciar sesión" : "Registrate",
           style: TextStyle(fontSize: 19, color: Colors.white),
         ),
         color: Colors.blue[500],
