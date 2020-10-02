@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'widgets/loginBackground.dart';
 import 'widgets/registerBody.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -33,14 +36,12 @@ class _MyHomePageState extends State<MyHomePage> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: Colors.grey[800],
-          resizeToAvoidBottomInset: false,
-          // body: RegisterBody()
-          body: LoginBackground(),
-          ),
-    );
+    return Scaffold(
+        backgroundColor: Colors.grey[800],
+        resizeToAvoidBottomInset: false,
+        // body: RegisterBody()
+        body: LoginBackground(),
+        );
   }
 }
 

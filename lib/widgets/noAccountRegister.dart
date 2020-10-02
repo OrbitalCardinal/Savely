@@ -1,3 +1,4 @@
+import 'package:Savely/widgets/registerBody.dart';
 import 'package:flutter/material.dart';
 
 class NoAccountRegister extends StatelessWidget {
@@ -20,7 +21,9 @@ class NoAccountRegister extends StatelessWidget {
             style: TextStyle(fontSize: 18, color: Colors.cyan[300]),
           ),
           onTap: () {
-            print("Registrate");
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return RegisterBody();
+            }));
           },
         ),
       ],

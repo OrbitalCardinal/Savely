@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "692968480982",
+    "firebase_url": "https://savely-95f7e.firebaseio.com",
+    "project_id": "savely-95f7e",
+    "storage_bucket": "savely-95f7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:692968480982:android:a7275e57a1818608ffa977",
+        "android_client_info": {
+          "package_name": "com.example.Savely"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "692968480982-dcl2vn0gfb8f106cabd4skov0db56do3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqBfT2Q_j_3e1ZOp8eWcnSJaYvGLwGgZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "692968480982-dcl2vn0gfb8f106cabd4skov0db56do3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

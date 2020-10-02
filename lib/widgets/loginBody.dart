@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'DividerAuth.dart';
 import 'expandedBlueButton.dart';
@@ -7,7 +8,16 @@ import 'noAccountRegister.dart';
 import 'textFieldGrey.dart';
 import 'textLogo.dart';
 
-class LoginBody extends StatelessWidget {
+class LoginBody extends StatefulWidget {
+  @override
+  _LoginBodyState createState() => _LoginBodyState();
+}
+
+class _LoginBodyState extends State<LoginBody> {
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
+
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +33,62 @@ class LoginBody extends StatelessWidget {
               children: [
                 TextLogo(),
                 SizedBox(height: size.height / 25),
-                TextFieldGrey(
-                  labelText: "Email",
-                  prefixIcon: Icon(
-                    Icons.person,
-                    color: Colors.cyan[300],
-                  ),
-                  pass: false,
+                TextField(
+                  controller: emailController,
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.cyan[300]),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[600],
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25))),
+                      prefixIcon: Icon(Icons.person),
+                      labelText: "Email",
+                      labelStyle: TextStyle(color: Colors.white, fontSize: 20)),
                 ),
                 SizedBox(height: size.height / 40),
-                TextFieldGrey(
-                  labelText: "Contraseña",
-                  prefixIcon: Icon(
-                    Icons.vpn_key,
-                    color: Colors.cyan[300],
-                  ),
-                  pass: true,
+                TextField(
+                  controller: passController,
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.cyan[300]),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[600],
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25))),
+                      prefixIcon: Icon(Icons.vpn_key),
+                      labelText: "Contraseña",
+                      labelStyle: TextStyle(color: Colors.white, fontSize: 20)),
                 ),
                 SizedBox(height: size.height / 25),
-                ExpandedBlueButton(login: true,),
+                Container(
+                  height: size.height / 13,
+                  width: double.infinity,
+                  child: RaisedButton(
+                    child: Text(
+                      "Iniciar sesión",
+                      style: TextStyle(fontSize: 19, color: Colors.white),
+                    ),
+                    color: Colors.blue[500],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    onPressed: () async {
+                      try {
+                        await _auth.signInWithEmailAndPassword(email: emailController.text, password: passController.text);
+                      } catch (err) {
+                        print(err);
+                      }
+                    },
+                  ),
+                ),
                 SizedBox(height: size.height / 45),
                 GestureDetector(
                   child: Text(
@@ -79,8 +126,3 @@ class LoginBody extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
