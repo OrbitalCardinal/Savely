@@ -86,11 +86,17 @@ class _LoginBodyState extends State<LoginBody> {
                         await _auth
                             .signInWithEmailAndPassword(
                                 email: emailController.text,
-                                password: passController.text).then((value) {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (_LoginBodyState) {
-                                    return HomePage(emailController.text);
-                                  }));
-                                });
+                                password: passController.text)
+                            .then((user) {
+                          if (user.user.emailVerified) {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (_LoginBodyState) {
+                              return HomePage(emailController.text);
+                            }));
+                          } else {
+                            print("Verifique su correo por favor");
+                          }
+                        });
                       } catch (err) {
                         print("Error: " + err.toString());
                       }

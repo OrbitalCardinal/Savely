@@ -101,11 +101,19 @@ class _RegisterBodyState extends State<RegisterBody> {
                   onPressed: () async {
                     try {
                       if (_confpassController.text == _passController.text) {
-                        await _auth.createUserWithEmailAndPassword(
+                        await  _auth.createUserWithEmailAndPassword(
                             email: _emailController.text,
-                            password: _passController.text).then((_) {
-                              Navigator.of(context).pop();
+                            password: _passController.text).then((user) {
+                              try {
+                                _auth.currentUser.sendEmailVerification();
+                                Navigator.pop(context);
+                              } catch (e) {
+                                print(e);
+                              }
+                              
                             });
+                      } else {
+                        print("Contraseñas no coinciden");
                       }
                     } catch (err) {
                       print(err);
