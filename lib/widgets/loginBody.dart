@@ -1,12 +1,8 @@
 import 'package:Savely/widgets/homePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'DividerAuth.dart';
-import 'expandedBlueButton.dart';
-import '../facebookCircularButton.dart';
-import '../googleCircularButton.dart';
+import 'errorModal.dart';
 import 'noAccountRegister.dart';
-import 'textFieldGrey.dart';
 import 'textLogo.dart';
 
 class LoginBody extends StatefulWidget {
@@ -16,6 +12,7 @@ class LoginBody extends StatefulWidget {
 
 class _LoginBodyState extends State<LoginBody> {
   final emailController = TextEditingController();
+  final emailSaveControler = TextEditingController();
   final passController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
@@ -89,16 +86,25 @@ class _LoginBodyState extends State<LoginBody> {
                                 password: passController.text)
                             .then((user) {
                           if (user.user.emailVerified) {
-                            Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_LoginBodyState) {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
                               return HomePage(emailController.text);
                             }));
                           } else {
-                            print("Verifique su correo por favor");
+                            showDialog(
+                                context: context,
+                                builder: (context) => ErrorModal(
+                                    'El correo no ha sido verificado'));
                           }
                         });
                       } catch (err) {
-                        print("Error: " + err.toString());
+                        print(err.code);
+                        if (err.code == 'wrong-password') {
+                          showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  ErrorModal('La contraseña es incorrecta'));
+                        }
                       }
                     },
                   ),
@@ -106,11 +112,43 @@ class _LoginBodyState extends State<LoginBody> {
                 SizedBox(height: size.height / 45),
                 GestureDetector(
                   child: Text(
-                    "¿Olvidate tu contraseña?",
+                    "¿Olvidaste tu contraseña?",
                     style: TextStyle(fontSize: 18, color: Colors.cyan[300]),
                   ),
                   onTap: () {
-                    print("Olvidaste tu contrasena");
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            content: Container(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text('Recuperación de contraseña',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextField(
+                                      controller: emailSaveControler,
+                                      decoration:
+                                          InputDecoration(labelText: 'Email'),
+                                    ),
+                                  ]),
+                            ),
+                            actions: [
+                              FlatButton(
+                                child: Text('Enviar'),
+                                onPressed: () {
+                                  _auth
+                                      .sendPasswordResetEmail(
+                                          email: emailSaveControler.text)
+                                      .then((value) => Navigator.pop(context));
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                    // _auth.sendPasswordResetEmail(email: null)
                   },
                 ),
                 SizedBox(height: size.height / 20),
@@ -121,16 +159,6 @@ class _LoginBodyState extends State<LoginBody> {
             width: size.width - size.width / 10,
             child: Column(
               children: [
-                DividerAuth("  O también inicia sesión con:  "),
-                SizedBox(height: size.height / 50),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GoogleCircularButton(),
-                    FacebookCircularButton(),
-                  ],
-                ),
-                SizedBox(height: size.height / 50),
                 NoAccountRegister(),
               ],
             ),

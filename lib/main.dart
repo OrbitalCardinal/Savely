@@ -1,11 +1,15 @@
+import 'package:Savely/widgets/signup-screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'widgets/loginBackground.dart';
-import 'widgets/registerBody.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await Firebase.initializeApp();
   runApp(MyApp());
 }
@@ -17,31 +21,14 @@ class MyApp extends StatelessWidget {
       title: 'Savely',
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: Colors.grey[800],
       ),
-      home: MyHomePage(),
+      // home: LoginBackground(),
       debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (ctx) => LoginBackground(),
+        SignupScreen.routeName: (ctx) => SignupScreen()
+      },
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    return Scaffold(
-        backgroundColor: Colors.grey[800],
-        resizeToAvoidBottomInset: false,
-        // body: RegisterBody()
-        body: LoginBackground(),
-        );
-  }
-}
-

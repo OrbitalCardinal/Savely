@@ -1,20 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../facebookCircularButton.dart';
-import '../googleCircularButton.dart';
-import 'DividerAuth.dart';
 import 'accountLogIn.dart';
-import 'expandedBlueButton.dart';
-import 'textFieldGrey.dart';
+import 'errorModal.dart';
+import 'loginBackground.dart';
 import 'textLogo.dart';
 
-class RegisterBody extends StatefulWidget {
+class SignupScreen extends StatefulWidget {
+  static const routeName = 'signup-screen';
+
   @override
-  _RegisterBodyState createState() => _RegisterBodyState();
+  _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _RegisterBodyState extends State<RegisterBody> {
+class _SignupScreenState extends State<SignupScreen> {
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
   final _confpassController = TextEditingController();
@@ -101,33 +99,37 @@ class _RegisterBodyState extends State<RegisterBody> {
                   onPressed: () async {
                     try {
                       if (_confpassController.text == _passController.text) {
-                        await  _auth.createUserWithEmailAndPassword(
-                            email: _emailController.text,
-                            password: _passController.text).then((user) {
-                              try {
-                                _auth.currentUser.sendEmailVerification();
-                                Navigator.pop(context);
-                              } catch (e) {
-                                print(e);
-                              }
-                              
-                            });
+                        await _auth
+                            .createUserWithEmailAndPassword(
+                                email: _emailController.text,
+                                password: _passController.text)
+                            .then((user) {
+                          try {
+                            _auth.currentUser.sendEmailVerification();
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (_) {
+                              return LoginBackground();
+                            }));
+                          } catch (e) {
+                            print(e);
+                          }
+                        });
                       } else {
-                        print("Contraseñas no coinciden");
+                        showDialog(
+                            context: context,
+                            builder: (context) =>
+                                ErrorModal('Las constraseñas no coinciden'));
                       }
                     } catch (err) {
-                      print(err);
+                      if (err.code == 'weak-password') {
+                        showDialog(
+                            context: context,
+                            builder: (context) => ErrorModal(
+                                'La contraseña debe contener más de 6 caracteres.'));
+                      }
                     }
                   },
                 ),
-              ),
-              DividerAuth('  O también registrate con:  '),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GoogleCircularButton(),
-                  FacebookCircularButton(),
-                ],
               ),
               AccountLogin()
             ],

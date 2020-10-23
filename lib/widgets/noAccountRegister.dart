@@ -1,4 +1,4 @@
-import 'package:Savely/widgets/registerBody.dart';
+import 'package:Savely/widgets/signup-screen.dart';
 import 'package:flutter/material.dart';
 
 class NoAccountRegister extends StatelessWidget {
@@ -8,23 +8,30 @@ class NoAccountRegister extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        Text(
-          "¿No tienes una cuenta?",
-          style: TextStyle(fontSize: 18, color: Colors.white),
+        Divider(
+          thickness: 1,
+          color: Colors.grey,
         ),
-        GestureDetector(
-          child: Text(
-            " Registrate",
-            style: TextStyle(fontSize: 18, color: Colors.cyan[300]),
-          ),
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-              return RegisterBody();
-            }));
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "¿No tienes una cuenta?",
+              style: TextStyle(fontSize: 18, color: Colors.white),
+            ),
+            GestureDetector(
+              child: Text(
+                " Registrate",
+                style: TextStyle(fontSize: 18, color: Colors.cyan[300]),
+              ),
+              onTap: () {
+                Navigator.of(context)
+                    .pushReplacementNamed(SignupScreen.routeName);
+              },
+            ),
+          ],
         ),
       ],
     );
