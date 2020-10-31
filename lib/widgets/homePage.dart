@@ -1,10 +1,12 @@
+import 'package:Savely/models/loan.dart';
 import 'package:Savely/widgets/history-screen.dart';
-import 'package:Savely/widgets/loan-scree.dart';
+import 'package:Savely/widgets/loan-screen.dart';
 import 'package:Savely/widgets/profile-screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   static const routeName = 'homepage';
+  static List<Loan> tempLoans = [];
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +27,38 @@ class HomePage extends StatelessWidget {
                 unselectedLabelColor: Theme.of(context).backgroundColor,
                 tabs: [
                   Tab(
-                    child: Icon(
-                      Icons.monetization_on,
+                    child: Container(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 6,),
+                          Icon(
+                            Icons.monetization_on,
+                          ),
+                          Text('Activos')
+                        ],
+                      ),
                     ),
                   ),
                   Tab(
-                    child: Icon(
-                      Icons.book,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 6,),
+                        Icon(
+                          Icons.book,
+                        ),
+                        Text('Historial')
+                      ],
                     ),
                   ),
                   Tab(
-                    child: Icon(
-                      Icons.person,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 6,),
+                        Icon(
+                          Icons.person,
+                        ),
+                        Text('Perfil')
+                      ],
                     ),
                   ),
                 ],

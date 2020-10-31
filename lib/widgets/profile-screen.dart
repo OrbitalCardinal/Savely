@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
       children: [
         Text(
           'Perfil',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 30),
         ),
         RaisedButton(
           child: Text('Cerrar sesión'),

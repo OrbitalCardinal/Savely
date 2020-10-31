@@ -141,13 +141,20 @@ class _LoginBodyState extends State<LoginBody> {
                                     ]),
                               ),
                               actions: [
+                                FlatButton(child: Text('Cancelar'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },),
                                 FlatButton(
                                   child: Text('Enviar'),
                                   onPressed: () {
                                     _auth.sendPasswordResetEmail(
                                             email: emailSaveController.text)
-                                        .then(
-                                            (value) => Navigator.pop(context));
+                                        .then((_) {
+                                          showDialog(context: context, builder: (context) {
+                                            ErrorModal('Se ha enviado un correo para el cambio de contraseña');
+                                          });
+                                        });
                                   },
                                 ),
                               ],

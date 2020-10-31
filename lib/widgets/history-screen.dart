@@ -7,7 +7,7 @@ class HistoryScreen extends StatelessWidget {
     return Center(
       child: Text(
         'Historial',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white, fontSize: 30),
       ),
     );
   }

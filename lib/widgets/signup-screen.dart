@@ -110,10 +110,17 @@ class _SignupScreenState extends State<SignupScreen> {
                               .then((user) {
                             try {
                               _auth.currentUser.sendEmailVerification();
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(builder: (_) {
-                                return LoginBackground();
-                              }));
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return ErrorModal(
+                                        'Se ha enviado el correo de verificación');
+                                  }).then((value) {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(builder: (_) {
+                                  return LoginBackground();
+                                }));
+                              });
                             } catch (e) {
                               print(e);
                             }

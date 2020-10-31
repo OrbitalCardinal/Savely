@@ -1,6 +1,6 @@
 import 'package:Savely/widgets/history-screen.dart';
 import 'package:Savely/widgets/homePage.dart';
-import 'package:Savely/widgets/loan-scree.dart';
+import 'package:Savely/widgets/loan-screen.dart';
 import 'package:Savely/widgets/profile-screen.dart';
 import 'package:Savely/widgets/signup-screen.dart';
 import 'package:firebase_core/firebase_core.dart';
